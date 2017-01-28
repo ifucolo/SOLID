@@ -19,7 +19,7 @@ public class BudgetAdapter extends RecyclerView.Adapter<BudgetAdapter.ViewHolder
         String date = "";
         
         if (intervalDataBase.date != null) {
-            String[] split = dataBases.get(position).date.split("-");
+            String[] split = intervalDataBase.date.split("-");
             date = split[1] + " " + Util.getMonthLittle(Integer.parseInt(split[0]));
         }
 
