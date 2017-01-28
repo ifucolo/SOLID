@@ -1,29 +1,3 @@
-package com.budgetedonline.adapter;
-
-import android.content.Context;
-import android.graphics.Color;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.budgetedonline.R;
-import com.budgetedonline.Util.Util;
-import com.budgetedonline.entity.DataBase;
-import com.budgetedonline.entity.IntervalDataBase;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
-/**
- * Created by iagomendesfucolo on 06/12/16.
- */
-
 public class BudgetAdapter extends RecyclerView.Adapter<BudgetAdapter.ViewHolder> {
 
     private ArrayList<IntervalDataBase> dataBases;
@@ -41,20 +15,17 @@ public class BudgetAdapter extends RecyclerView.Adapter<BudgetAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if (position == 0 || position%2 == 0) {
-            holder.layout.setBackgroundColor(holder.itemView.getContext().getColor(R.color.grayLight));
-        } else {
-            holder.layout.setBackgroundColor(holder.itemView.getContext().getColor(R.color.gray));
-        }
+        IntervalDataBase intervalDataBase = dataBases.get(position);
         String date = "";
-        if (dataBases.get(position).date != null) {
+        
+        if (intervalDataBase.date != null) {
             String[] split = dataBases.get(position).date.split("-");
             date = split[1] + " " + Util.getMonthLittle(Integer.parseInt(split[0]));
         }
 
         holder.date.setText(date);
-        holder.name.setText(dataBases.get(position).description);
-        holder.value.setText(context.getString(R.string.money, String.valueOf(dataBases.get(position).amount)));
+        holder.name.setText(intervalDataBase.description);
+        holder.value.setText(context.getString(R.string.money, String.valueOf(intervalDataBase.amount)));
     }
 
     @Override
